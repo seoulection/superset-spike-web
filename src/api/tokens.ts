@@ -25,7 +25,7 @@ const fetchAccessToken = async () => {
   }
 }
 
-export const fetchGuestToken = async () => {
+export const fetchGuestToken = async (dashboardId: string) => {
   const accessToken = await fetchAccessToken()
   const headers = new Headers({
     'Content-Type': 'application/json',
@@ -34,9 +34,7 @@ export const fetchGuestToken = async () => {
 
   try {
     const body = {
-      resources: [
-        { type: 'dashboard', id: '11db5515-9b83-4bd7-b4a3-9ee1bbdb9365' },
-      ],
+      resources: [{ type: 'dashboard', id: dashboardId }],
       rls: [],
       user: {
         username: 'guest',

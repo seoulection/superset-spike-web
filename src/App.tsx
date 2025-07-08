@@ -1,32 +1,42 @@
 import { useEffect, useRef } from 'react'
 import { embedDashboard } from '@superset-ui/embedded-sdk'
 import { fetchGuestToken } from './api/tokens'
-import { SUPERSET_DOMAIN } from './constants'
+import { DASHBOARD_ID, SUPERSET_DOMAIN } from './constants'
 import './App.css'
 
 function App() {
   const dashboardRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const embed = async () => {
-      if (dashboardRef.current) {
-        await embedDashboard({
-          id: '11db5515-9b83-4bd7-b4a3-9ee1bbdb9365',
-          supersetDomain: SUPERSET_DOMAIN,
-          mountPoint: dashboardRef.current,
-          fetchGuestToken: () => fetchGuestToken(),
-        })
-      }
-    }
-
-    embed()
-  }, [])
+  // useEffect(() => {
+  //   const embed = async () => {
+  //     if (dashboardRef.current) {
+  //       await embedDashboard({
+  //         id: DASHBOARD_ID,
+  //         supersetDomain: SUPERSET_DOMAIN,
+  //         mountPoint: dashboardRef.current,
+  //         fetchGuestToken: () => fetchGuestToken(DASHBOARD_ID),
+  //         dashboardUiConfig: {
+  //           filters: {
+  //             expanded: false,
+  //           },
+  //           urlParams: {
+  //             gender,
+  //           },
+  //         },
+  //       })
+  //     }
+  //   }
+  //
+  //   embed()
+  // }, [])
 
   return (
-    <>
-      <h1>🔥 Super Hot Superset Dashboard 🔥</h1>
+    <div className="wrapper">
+      <h1>Superset Dashboard</h1>
       <div id="dashboard" className="dashboard" ref={dashboardRef} />
-    </>
+
+      {/* iframe embed code goes here */}
+    </div>
   )
 }
 
